@@ -1,0 +1,90 @@
+version: "3"
+services:
+  elasticsearch:
+    # sysctl -w vm.max_map_count=262144
+    # https://github.com/boot2docker/boot2docker/issues/1216
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+#      resources:
+#        limits:
+#          cpus: "1"
+#          memory: 200M
+      restart_policy:
+        condition: on-failure
+    environment:
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - cluster.name=elasticsearch
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - ES_JAVA_OPTS=-Xms128m -Xmx128m
+    networks:
+      - private
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+  caddy:
+    image: bionimbuz/caddy:dev
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+#      resources:
+#        limits:
+#          cpus: "1"
+#          memory: 64M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    networks:
+      - private
+    #volumes:
+    #  - /mnt/volume-nyc1-01-part1/caddy/ssl:/srv/ssl
+  web-ui:
+    image: bionimbuz/web-ui
+    deploy:
+      replicas: 1
+ #     resources:
+ #       limits:
+ #         cpus: "1"
+ #         memory: 64M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - private
+  scheduling:
+    image: bionimbuz/scheduling
+    deploy:
+      replicas: 1
+ #     resources:
+ #       limits:
+ #         cpus: "1"
+ #         memory: 64M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - private
+  provision:
+    image: bionimbuz/provision
+    deploy:
+      replicas: 1
+ #     resources:
+ #       limits:
+ #         cpus: "1"
+ #         memory: 64M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - private
+networks:
+  private:
+    driver: overlay
+
+volumes:
+  es-data:
