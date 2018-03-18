@@ -1,0 +1,6 @@
+scheduling.dao.driver=elasticsearch
+scheduling.dao.driver.elasticsearch.cluster.name=elasticsearch
+scheduling.dao.driver.elasticsearch.transport.host=elasticsearch
+scheduling.server.connector.http.port=8080
+scheduling.server.connector.https.enabled=false
+scheduling.pool.size=10
