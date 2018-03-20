@@ -27,8 +27,12 @@ $ docker-compose -f docker-compose-minimal.yml up -d
 
 ### Observações
 O BioNimbuzBox utiliza um cliente docker do projeto [spotify/docker-client][spotify/docker-client]. 
+
 Contudo, a biblioteca utilizada para construir o módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/pom.xml#L110) do BioNimbuzBox utiliza um [fork][bionimbuzbox/docker-client]. 
+
 Quando o  PR [#755][pr 755 spotify/docker-client] for aceito, poderemos utilizar as releases oficiais do projeto [spotify/docker-client][spotify/docker-client].
+
+Dessa forma, será necessário compilar o projeto [bionimbuzbox/docker-client][bionimbuzbox/docker-client] e incluir a biblioteca gerada como dependencia do módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/)
 
 [spotify/docker-client]: https://github.com/spotify/docker-client
 [bionimbuzbox/docker-client]: https://github.com/bionimbuzbox/docker-client/tree/dev
@@ -39,7 +43,7 @@ Quando o  PR [#755][pr 755 spotify/docker-client] for aceito, poderemos utilizar
 - Maven
 - Git
 
-#### Building Java Code and Docker Images (using Docker Machine)
+#### Building Java Code and Docker Images (using Docker Machine) from Source
 ```
 $ docker-machine create -d virtualbox --virtualbox-memory 2048 bionimbuzbox
 $ eval $(docker-machine env bionimbuzbox)
