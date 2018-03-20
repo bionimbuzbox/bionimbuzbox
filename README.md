@@ -29,13 +29,11 @@ Abra o navegador em http://web-ui/
 ## Build from Source
 
 ### Observações
-O BioNimbuzBox utiliza um cliente docker do projeto [spotify/docker-client][spotify/docker-client]. 
+O BioNimbuzBox utiliza um cliente docker, escrito em java, do projeto [spotify/docker-client][spotify/docker-client]. Atualmente este cliente está sendo usado através de um [fork][bionimbuzbox/docker-client] para construir o módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/pom.xml#L110) do BioNimbuzBox. 
 
-Contudo, a biblioteca utilizada para construir o módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/pom.xml#L110) do BioNimbuzBox utiliza um [fork][bionimbuzbox/docker-client]. 
+Quando o  PR [#755][pr 755 spotify/docker-client] for aceito pelo projeto [spotify/docker-client][spotify/docker-client], poderemos utilizar as releases oficiais, não sendo mais necessário o [fork][bionimbuzbox/docker-client].
 
-Quando o  PR [#755][pr 755 spotify/docker-client] for aceito, poderemos utilizar as releases oficiais do projeto [spotify/docker-client][spotify/docker-client].
-
-Dessa forma, será necessário compilar o projeto [bionimbuzbox/docker-client][bionimbuzbox/docker-client] e incluir a biblioteca gerada como dependencia do módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/)
+Dessa forma, será necessário compilar o projeto [bionimbuzbox/docker-client (fork)][bionimbuzbox/docker-client] e incluir a biblioteca gerada como dependencia do módulo [common](https://github.com/bionimbuzbox/bionimbuzbox/blob/master/common/)
 
 [spotify/docker-client]: https://github.com/spotify/docker-client
 [bionimbuzbox/docker-client]: https://github.com/bionimbuzbox/docker-client/tree/dev
