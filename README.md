@@ -13,6 +13,7 @@ O BioNimbuzBox foi concebido para ser utilizado sob o modelo de Software como Se
 #### Para uma instalação de desenvolvimento "all-in-one" usando o Docker Machine
 ```
 $ docker-machine create -d virtualbox --virtualbox-memory 2048 bionimbuzbox
+$ docker-machine ssh bionimbuzbox sudo sysctl -w vm.max_map_count=262144
 $ eval $(docker-machine env bionimbuzbox)
 
 $ IP=$(docker-machine ip bionimbuzbox)
@@ -22,6 +23,8 @@ $ docker swarm init --advertise-addr $IP:2377
 $ wget https://raw.githubusercontent.com/bionimbuzbox/bionimbuzbox/master/docker-compose-minimal.yml
 $ docker-compose -f docker-compose-minimal.yml up -d
 ```
+
+Abra o navegador em http://web-ui/
 
 ## Build from Source
 
