@@ -1,0 +1,18 @@
+https://web-ui.box.io.etc.br {
+  tls tiagoalves83@gmail.com
+  proxy / web-ui:8080/
+}
+
+https://provision.box.io.etc.br {
+  tls tiagoalves83@gmail.com
+  proxy / provision:8080/
+}
+
+https://scheduling.box.io.etc.br {
+  tls tiagoalves83@gmail.com
+  proxy / scheduling:8080/
+}
+
+tls {
+  clients require verify_if_given /srv/ca.pem
+}

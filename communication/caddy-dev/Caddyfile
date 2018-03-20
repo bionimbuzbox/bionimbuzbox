@@ -1,0 +1,25 @@
+http://web-ui {
+  proxy /api/v1/provider provision:8080 {
+    transparent
+  }
+
+  proxy /api/v1/datacenter provision:8080 {
+    transparent
+  }
+
+  proxy /api/v1/cluster provision:8080 {
+    transparent
+  }
+
+  proxy /api/v1/server provision:8080 {
+    transparent
+  }
+
+  proxy /api/v1/workflow scheduling:8080 {
+    transparent
+  }
+
+  proxy / web-ui:8080 {
+    transparent
+  }
+}
