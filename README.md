@@ -2,7 +2,11 @@
 
 O BioNimbuzBox é uma plataforma baseada em containers (Docker ou Outros) para a execução de workflows de bioinformática em nuvens federadas utilizando os modelos de Infraestrutura como Serviço - IaaS e Plataforma como Serviço - PaaS.
 
-O BioNimbuzBox foi concebido para ser utilizado sob o modelo de Software como Serviço - SaaS através de um navegador web. Para o usuário/pesquisador de bioinformática, 
+O BioNimbuzBox foi concebido para ser utilizado sob o modelo de Software como Serviço - SaaS através de um navegador web. 
+
+Para o usuário/pesquisador de bioinformática, significa utilizar um software para execução de workflows de bioinformática sem a necessidade de instalação e configuração de nenhum recurso. 
+
+Para o usuário/administrador de recursos de TI, a simplicidade de provisionamento de recursos de TI em diferentes provedores de nuvem, construindo uma federação de nuvens capaz de incorporar recursos entregues sob os modelos de IaaS e/ou PaaS, transpõe as dificuldades encontradas em soluções que fazem uso de apenas um único fornecedor/provedor.
 
 ## Quick Start
 
