@@ -1,0 +1,6 @@
+size=512mb
+enable-backup=false
+enable-ipv6=false
+enable-private-networking=true
+image=coreos-stable
+region=nyc3

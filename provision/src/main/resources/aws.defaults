@@ -1,0 +1,36 @@
+region=us-east-1
+size=t1.micro
+# PV - https://coreos.com/dist/aws/aws-stable.json
+ap-northeast-1.image=ami-1885af7f
+ap-northeast-2.image=ami-2661b348
+ap-south-1.image=ami-5f483a30
+ap-southeast-1.image=ami-a9873cca
+ap-southeast-2.image=ami-14d9d177
+ca-central-1.image=ami-58b60a3c
+cn-north-1.image=ami-6e36e003
+eu-central-1.image=ami-2104d84e
+eu-west-1.image=ami-cbcdcdad
+eu-west-2.image=ami-a39581c7
+sa-east-1.image=ami-eccea380
+us-east-1.image=ami-a6a7c2b0
+us-east-2.image=ami-d62007b3
+us-gov-west-1.image=ami-3ba2265a
+us-west-1.image=ami-c17255a1
+us-west-2.image=ami-d2aa34b2
+# HVM - https://coreos.com/dist/aws/aws-stable.json
+#ap-northeast-1.image=ami-8284aee5
+#ap-northeast-2.image=ami-b974a6d7
+#ap-south-1.image=ami-2a403245
+#ap-southeast-1.image=ami-67863d04
+#ap-southeast-2.image=ami-1fc7cf7c
+#ca-central-1.image=ami-30b10d54
+#cn-north-1.image=ami-6a09df07
+#eu-central-1.image=ami-d60ad6b9
+#eu-west-1.image=ami-0bcbcb6d
+#eu-west-2.image=ami-7eeafe1a
+#sa-east-1.image=ami-a3cda0cf
+#us-east-1.image=ami-ad593cbb
+#us-east-2.image=ami-102f0875
+#us-gov-west-1.image=ami-6fae2a0e
+#us-west-1.image=ami-25735445
+#us-west-2.image=ami-e5af3185

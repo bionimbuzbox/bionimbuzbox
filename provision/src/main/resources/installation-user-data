@@ -1,0 +1,81 @@
+#cloud-config
+
+write_files:
+    - path: /etc/docker/ca.pem
+      permissions: 0644
+      content: |
+        $docker_ca_content
+    - path: /etc/docker/server.pem
+      permissions: 0644
+      content: |
+        $docker_server_cert_content
+    - path: /etc/docker/server-key.pem
+      permissions: 0600
+      content: |
+        $docker_server_key_content
+    - path: /etc/ssl/private/etcd-trusted-ca.pem
+      permissions: 0644
+      content: |
+        $etcd_trusted_ca_content
+    - path: /etc/ssl/private/etcd-cert.pem
+      permissions: 0644
+      content: |
+        $etcd_cert_content
+    - path: /etc/ssl/private/etcd-key.pem
+      permissions: 0600
+      content: |
+        $etcd_key_content
+    - path: /etc/ssl/private/etcd-peer-trusted-ca.pem
+      permissions: 0644
+      content: |
+        $etcd_peer_trusted_ca_content
+    - path: /etc/ssl/private/etcd-peer-cert.pem
+      permissions: 0644
+      content: |
+        $etcd_peer_cert_content
+    - path: /etc/ssl/private/etcd-peer-key.pem
+      permissions: 0600
+      content: |
+        $etcd_peer_key_content
+
+coreos:
+  etcd2:
+    discovery: $discovery_url
+    advertise-client-urls: http://$private_ipv4:2379
+    initial-advertise-peer-urls: http://$private_ipv4:2380
+    listen-client-urls: http://$private_ipv4:2379
+    listen-peer-urls: http://$private_ipv4:2380
+    cert-file: /etc/ssl/private/etcd-cert.pem
+    key-file: /etc/ssl/private/etcd-key.pem
+    client-cert-auth: true
+    trusted-ca-file: /etc/ssl/private/etcd-trusted-ca.pem
+    peer-client-cert-auth: true
+    peer-trusted-ca-file: /etc/ssl/private/etcd-peer-trusted-ca.pem
+    peer-cert-file: /etc/ssl/private/etcd-peer-cert.pem
+    peer-key-file: /etc/ssl/private/etcd-peer-key.pem
+  units:
+  - name: etcd2.service
+    command: start
+  units:
+    - name: docker-tls-tcp.socket
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Docker Secured Socket for the API
+
+        [Socket]
+        ListenStream=$private_ipv4:2376
+        BindIPv6Only=both
+        Service=docker.service
+
+        [Install]
+        WantedBy=sockets.target
+    - name: docker.service
+      drop-ins:
+        - name: 10-tls-verify.conf
+          content: |
+            [Service]
+            Environment="DOCKER_OPTS=--tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server.pem --tlskey=/etc/docker/server-key.pem"
+
+

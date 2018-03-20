@@ -1,0 +1,17 @@
+provision.dao.driver=elasticsearch
+provision.dao.driver.elasticsearch.cluster.name=elasticsearch
+provision.dao.driver.elasticsearch.transport.host=elasticsearch
+provision.server.connector.http.port=8080
+provision.server.connector.https.enabled=false
+provision.provider.digitalocean.size=512mb
+provision.provider.digitalocean.region=nyc1
+provision.provider.digitalocean.image=1601
+provision.provider.digitalocean.ipv6=false
+provision.provider.digitalocean.private-network=true
+provision.provider.digitalocean.backup=false
+provision.provider.aws.size=m1.small
+provision.provider.aws.region=nyc1
+provision.provider.aws.image=1601
+provision.provider.aws.ipv6=false
+provision.provider.aws.private-network=true
+provision.provider.aws.backup=false

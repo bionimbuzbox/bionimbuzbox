@@ -1,0 +1,64 @@
+{
+  "ignition": {
+    "version": "2.0.0",
+    "config": {}
+  },
+  "storage": {
+    "files": [
+      {
+        "filesystem": "root",
+        "path": "/etc/docker/ca.pem",
+        "contents": {
+          "source": "data:,-----BEGIN%20CERTIFICATE-----%0AMIIFNDCCAx6gAwIBAgIBATALBgkqhkiG9w0BAQswLTEMMAoGA1UEBhMDVVNBMRAw%0ADgYDVQQKEwdldGNkLWNhMQswCQYDVQQLEwJDQTAeFw0xNTA5MDIxMDExMDhaFw0y%0ANTA5MDIxMDExMThaMC0xDDAKBgNVBAYTA1VTQTEQMA4GA1UEChMHZXRjZC1jYTEL%0A...%20...%20...%0A",
+          "verification": {}
+        },
+        "mode": 420,
+        "user": {},
+        "group": {}
+      },
+      {
+        "filesystem": "root",
+        "path": "/etc/docker/server.pem",
+        "contents": {
+          "source": "data:,-----BEGIN%20CERTIFICATE-----%0AMIIFajCCA1SgAwIBAgIBBTALBgkqhkiG9w0BAQswLTEMMAoGA1UEBhMDVVNBMRAw%0ADgYDVQQKEwdldGNkLWNhMQswCQYDVQQLEwJDQTAeFw0xNTA5MDIxMDM3MDFaFw0y%0ANTA5MDIxMDM3MDNaMEQxDDAKBgNVBAYTA1VTQTEQMA4GA1UEChMHZXRjZC1jYTEQ%0A...%20...%20...%0A",
+          "verification": {}
+        },
+        "mode": 420,
+        "user": {},
+        "group": {}
+      },
+      {
+        "filesystem": "root",
+        "path": "/etc/docker/server-key.pem",
+        "contents": {
+          "source": "data:,-----BEGIN%20RSA%20PRIVATE%20KEY-----%0AMIIJKAIBAAKCAgEA23Q4yELhNEywScrHl6%2BMUtbonCu59LIjpxDMAGxAHvWhWpEY%0AP5vfas8KgxxNyR%2BU8VpIjEXvwnhwCx%2FCSCJc3%2FVtU9v011Ir0WtTrNDocb90fIr3%0AYeRWq744UJpBeDHPV9opf8xFE7F74zWeTVMwtiMPKcQDzZ7XoNyJMxg1wmiMbdCj%0A...%20...%20...%0A",
+          "verification": {}
+        },
+        "mode": 420,
+        "user": {},
+        "group": {}
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "name": "docker.service",
+        "enable": true,
+        "dropins": [
+          {
+            "name": "20-clct-docker.conf",
+            "contents": "[Service]\nEnvironment=\"DOCKER_OPTS=--tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server.pem --tlskey=/etc/docker/server-key.pem\""
+          }
+        ]
+      },
+      {
+        "name": "docker-tls-tcp.socket",
+        "enable": true,
+        "contents": "[Unit]\nDescription=Docker Secured Socket for the API\n\n[Socket]\nListenStream=2376\nBindIPv6Only=both\nService=docker.service\n\n[Install]\nWantedBy=sockets.target\n"
+      }
+    ]
+  },
+  "networkd": {},
+  "passwd": {}
+}
