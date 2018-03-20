@@ -1,0 +1,21 @@
+<h1>Datacenters</h1>
+<table class="table table-hover table-condensed load-data-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="datacenter in $ctrl.datacenters" ng-init="provider = $ctrl.filterByID(datacenter.provider, $ctrl.providers)">
+      <td><a href="/#!/datacenter/{{ datacenter.id }}">{{ datacenter.id }}</a></td>
+      <td><a href="/#!/datacenter/{{ datacenter.id }}">{{ datacenter.name }}</a></td>
+      <!--<td>{{ provider.name }}</td>-->
+      <td><a href="/#!/provider/{{ provider.id }}">{{ provider.name }}({{ provider.type }})</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--
+
+-->

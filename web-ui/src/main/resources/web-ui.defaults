@@ -1,0 +1,3 @@
+web-ui.server.contextPath=/web
+web-ui.server.connector.http.port=8080
+web-ui.server.connector.https.enabled=false

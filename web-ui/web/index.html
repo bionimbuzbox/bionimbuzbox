@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BioNimbuzBox</title>
+    <base href="/">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Angular -->
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-route.min.js"></script>
+    <script src="js/angular/angular-resource.min.js"></script>
+    <script src="js/angular/angular-pattern-restrict.min.js"></script>
+    <script src="js/init.js"></script>
+    <!-- APP -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+    <script src="app/app.controller.js"></script>
+    <!-- Providers -->
+    <script src="app/providers/providers.module.js"></script>
+    <script src="app/providers/providers.service.js"></script>
+    <script src="app/providers/providers.controller.js"></script>
+    <script src="app/providers/providers.component.js"></script>
+    <!-- Datacenters -->
+    <script src="app/datacenters/datacenters.module.js"></script>
+    <script src="app/datacenters/datacenters.service.js"></script>
+    <script src="app/datacenters/datacenters.controller.js"></script>
+    <script src="app/datacenters/datacenters.component.js"></script>
+    <!-- Clusters -->
+    <script src="app/clusters/clusters.module.js"></script>
+    <script src="app/clusters/clusters.service.js"></script>
+    <script src="app/clusters/clusters.controller.js"></script>
+    <script src="app/clusters/clusters.component.js"></script>
+    <!-- Servers -->
+    <script src="app/servers/servers.module.js"></script>
+    <script src="app/servers/servers.service.js"></script>
+    <script src="app/servers/servers.controller.js"></script>
+    <script src="app/servers/servers.component.js"></script>
+    <!-- Workflows -->
+    <script src="app/workflows/workflows.module.js"></script>
+    <script src="app/workflows/workflows.service.js"></script>
+    <script src="app/workflows/workflows.controller.js"></script>
+    <script src="app/workflows/workflows.component.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Static navbar -->
+    <div id="menu" ng-include src="'app/menu.html'"></div>
+
+
+
+    <div id="content" class="container">
+      <div ng-view></div>
+      <!--
+      <div id="debug">
+        <p><a href="#trace" class="btn" data-toggle="collapse">Debug</a></p>
+        <pre id="trace" class="collapse">{{ dump() }}</pre>
+      </div>
+    -->
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+
+  </body>
+</html>

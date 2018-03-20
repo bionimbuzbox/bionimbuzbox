@@ -1,0 +1,22 @@
+body {
+  font: 14px helvetica neue, helvetica, arial, sans-serif;
+}
+
+#cy {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+pre.box-small {
+  overflow: auto;
+  max-height: 200px;
+  white-space: pre-wrap;
+}
+/*
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+*/

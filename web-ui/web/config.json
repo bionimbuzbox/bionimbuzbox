@@ -1,0 +1,123 @@
+{
+  "api" : {
+    "provider": "/api/v1",
+    "datacenter": "/api/v1",
+    "cluster": "/api/v1",
+    "server": "/api/v1",
+    "workflow": "/api/v1"
+  },
+  "providerTypes" : {
+    "aws" : {
+      "description": "Amazon Web Service",
+      "meta": [{
+        "key" : "access-key-id",
+        "description" : "Access Key ID",
+        "html" : "text",
+        "required" : true
+      },
+      {
+        "key" : "secret-access-key",
+        "description" : "Secret Access Key",
+        "html" : "text",
+        "required" : true
+      }]
+    },
+    "digitalocean" : {
+      "description": "Digital Ocean",
+      "meta": [{
+        "key" : "auth-token",
+        "description" : "Auth Token",
+        "html" : "text",
+        "required" : true
+      }]
+    },
+    "gce" : {
+      "description": "Google Compute Engine",
+      "meta": [{
+        "key" : "project",
+        "description" : "Project Name",
+        "html" : "text",
+        "required" : true
+      }]
+    },
+    "ssh" : {
+      "description": "SSH",
+      "meta": [{
+        "key" : "ssh-key",
+        "description" : "SSH Key",
+        "html" : "text",
+        "required" : true
+      }]
+    }
+  },
+  "clusterTypes" : {
+    "swarm" : {
+      "description" : "Docker Swarm",
+      "meta" : []
+    }
+  },
+  "provider": {
+    "meta" : [{
+      "key" : "domain",
+      "description" : "Domain",
+      "html" : "text",
+      "placeholder" : "io.etc.br",
+      "value" : "",
+      "required" : true
+    }]
+  },
+  "datacenter": {
+    "meta" : [{
+      "key" : "region",
+      "description" : "Region",
+      "html" : "text",
+      "placeholder" : "nyc3",
+      "value" : "",
+      "required" : true
+    }]
+  },
+  "cluster": {
+    "meta" : [{
+      "key" : "storage-url",
+      "description" : "Storage URL",
+      "html" : "text",
+      "placeholder" : "https://storage.box.io.etc.br",
+      "value" : "https://storage.box.io.etc.br",
+      "required" : true
+    },
+    {
+      "key" : "storage-access-key",
+      "description" : "Storage Access Key",
+      "html" : "text",
+      "placeholder" : "",
+      "value" : "",
+      "required" : true
+    },
+    {
+      "key" : "storage-secret-key",
+      "description" : "Storage Secret Key",
+      "html" : "text",
+      "placeholder" : "",
+      "value" : "",
+      "required" : true
+    }]
+  },
+  "server": {
+    "meta" : [{
+      "key" : "role",
+      "description" : "Role",
+      "html" : "text",
+      "placeholder" : "manager | worker",
+      "value" : "manager",
+      "required" : true
+    },
+    {
+      "key" : "size",
+      "description" : "Size",
+      "html" : "text",
+      "placeholder" : "512mb",
+      "value" : "512mb",
+      "required" : true
+    }]
+  }
+}

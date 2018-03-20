@@ -1,0 +1,23 @@
+<h1>Clusters</h1>
+<table class="table table-hover table-condensed load-data-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Datacenter</th>
+      <th>Provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="cluster in $ctrl.clusters"
+        ng-init="
+          datacenter = $ctrl.filterByID(cluster.datacenter, $ctrl.datacenters);
+          provider = $ctrl.filterByID(datacenter.provider, $ctrl.providers);
+        ">
+      <td><a href="/#!/cluster/{{ cluster.id }}">{{ cluster.id }}</a></td>
+      <td><a href="/#!/cluster/{{ cluster.id }}">{{ cluster.name }}</a></td>
+      <td><a href="/#!/datacenter/{{ datacenter.id }}">{{ datacenter.name }}</a></td>
+      <td><a href="/#!/provider/{{ provider.id }}">{{ provider.name }} ({{ provider.type }})</a></td>
+    </tr>
+  </tbody>
+</table>

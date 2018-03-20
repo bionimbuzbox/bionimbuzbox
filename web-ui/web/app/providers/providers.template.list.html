@@ -1,0 +1,21 @@
+<h1>Providers</h1>
+<table class="table table-hover table-condensed load-data-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Meta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="provider in $ctrl.providers">
+      <td><a href="/#!/provider/{{ provider.id }}">{{ provider.id }}</a></td>
+      <td><a href="/#!/provider/{{ provider.id }}">{{ provider.name }}</a></td>
+      <td><a href="/#!/provider/{{ provider.id }}">{{ provider.type }}</a></td>
+      <td>
+        <span ng-repeat="(key, value) in provider.meta">{{ key }}:{{value}}<span ng-if="!$last">, </span></span>
+      </td>
+    </tr>
+  </tbody>
+</table>

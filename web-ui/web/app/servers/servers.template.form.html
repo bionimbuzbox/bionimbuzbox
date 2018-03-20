@@ -1,0 +1,78 @@
+<h1>Server</h1>
+
+<div ng-if="$ctrl.clusters.length == 0">
+  You don't have any Cluster, <a href="/#!/cluster">please add one</a>.
+</div>
+
+<div id="messages">
+  <pre ng-repeat="msg in $ctrl.messages track by $index" class="bg-info">{{ msg }}</pre>
+</div>
+
+<form class="form-group" method="post" ng-if="$ctrl.clusters.length > 0">
+  <div class="form-group" ng-if="$ctrl.server.id">
+    <label for="id">ID</label>
+      <input type="text" ng-model="$ctrl.server.id"
+      class="form-control"
+      readonly="true" />
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+      <input type="text" ng-model="$ctrl.server.name"
+      class="form-control"
+      pattern="^[a-z0-9\-]*$" ng-pattern-restrict />
+  </div>
+  <div class="form-group">
+    <label for="cluster">Cluster</label>
+      <select class="form-control"
+        ng-options="option.id as option.name for option in $ctrl.clusters"
+        ng-model="$ctrl.server.cluster">
+        <option value="">Select a Cluster</option>
+      </select>
+  </div>
+
+  <!-- Default Meta -->
+  <div class="form-group" ng-repeat="meta in $ctrl.config.server.meta">
+    <label for="{{ meta.key }}">{{ meta.description }}</label>
+      <input type="{{ meta.html }}" ng-model="$ctrl.server.meta[meta.key]"
+      class="form-control" placeholder="{{ meta.placeholder }}" />
+  </div>
+
+  <!-- Aditional Meta -->
+  <div class="form-group">
+    <label for="meta">Meta</label>
+    <div ng-repeat="(key, value) in $ctrl.server.meta" ng-if="$ctrl.showAsMeta(key)" class="row form-group">
+      <div class="col-md-5">
+        <input readonly type="text"
+          class="form-control"
+          value="{{ key }}" />
+      </div>
+      <div class="col-md-6">
+        <input type="text" ng-model="$ctrl.server.meta[key]"
+          class="form-control" />
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-danger btn-block" ng-click="$ctrl.removeMeta(key)">-</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-5">
+        <input type="text"
+          class="form-control"
+          ng-model="metaKey"
+          pattern="^[a-z0-9\-]*$" ng-pattern-restrict/>
+      </div>
+      <div class="col-md-6">
+        <input type="text"
+          class="form-control"
+          ng-model="metaValue"
+          placeholder="New Meta Value"/>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-primary btn-block" ng-click="$ctrl.addMeta(metaKey, metaValue)">+</button>
+      </div>
+    </div>
+  </div>
+  <button ng-if="!$ctrl.server.id" type="submit" class="btn btn-default" ng-click="$ctrl.save()">Save</button>
+  <button ng-if="$ctrl.server.id" type="submit" class="btn btn-default" ng-click="$ctrl.remove()">Remove</button>
+
+</form>

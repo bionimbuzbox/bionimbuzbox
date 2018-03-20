@@ -1,0 +1,82 @@
+<h1>{{ $ctrl.config.providerTypes[$ctrl.provider.type].description }} Provider </h1>
+
+<div id="messages">
+  <pre ng-repeat="msg in $ctrl.messages track by $index" class="bg-info">{{ msg }}</pre>
+</div>
+
+<form class="form-group" method="post">
+  <div class="form-group" ng-if="$ctrl.provider.id">
+    <label for="id">ID</label>
+      <input type="text" ng-model="$ctrl.provider.id"
+      class="form-control"
+      readonly="true" />
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+      <input type="text" ng-model="$ctrl.provider.name"
+      class="form-control"
+      pattern="^[a-z0-9\-]*$" ng-pattern-restrict/>
+  </div>
+  <div class="form-group">
+    <label for="type">Type</label>
+    <select class="form-control"
+      ng-options="key as value.description for (key, value) in $ctrl.config.providerTypes"
+      ng-model="$ctrl.provider.type">
+      <option value="">Select a Provider Type</option>
+    </select>
+  </div>
+  <div class="form-group" ng-if="$ctrl.provider.type != undefined" ng-repeat="meta in $ctrl.config.providerTypes[$ctrl.provider.type].meta">
+    <label for="{{ meta.key }}">{{ meta.description }}</label>
+      <input type="text" ng-model="$ctrl.provider.meta[meta.key]"
+      class="form-control" />
+  </div>
+
+  <!-- Default Meta -->
+  <div class="form-group" ng-repeat="meta in $ctrl.config.provider.meta">
+    <label for="{{ meta.key }}">{{ meta.description }}</label>
+      <input type="{{ meta.html }}" ng-model="$ctrl.provider.meta[meta.key]"
+      class="form-control" placeholder="{{ meta.placeholder }}" />
+  </div>
+
+  <!-- Aditional Meta -->
+  <div class="form-group">
+    <label for="meta">Meta</label>
+    <div ng-repeat="(key, value) in $ctrl.provider.meta" ng-if="$ctrl.showAsMeta(key)" class="row form-group">
+      <div class="col-md-5">
+        <input readonly type="text"
+          class="form-control"
+          value="{{ key }}" />
+      </div>
+      <div class="col-md-6">
+        <input type="text" ng-model="$ctrl.provider.meta[key]"
+          class="form-control" />
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-danger btn-block" ng-click="$ctrl.removeMeta(key)">-</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-5">
+        <input type="text"
+          class="form-control"
+          placeholder="New Meta Key"
+          ng-model="metaKey"
+          pattern="^[a-z0-9\-]*$" ng-pattern-restrict/>
+      </div>
+      <div class="col-md-6">
+        <input type="text"
+          class="form-control"
+          ng-model="metaValue"
+          placeholder="New Meta Value"/>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-primary btn-block" ng-click="$ctrl.addMeta(metaKey, metaValue)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" ng-click="$ctrl.save()">Save</button>
+  <button type="submit" class="btn btn-danger" ng-click="$ctrl.remove()">Remove</button>
+
+
+</form>

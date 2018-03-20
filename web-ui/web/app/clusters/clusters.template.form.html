@@ -1,0 +1,92 @@
+<h1>{{ $ctrl.config.clusterTypes[$ctrl.cluster.type].description }} Cluster </h1>
+
+<div ng-if="$ctrl.datacenters.length == 0">
+  You don't have any Datacenter, <a href="/#!/datacenter">please add one</a>.
+</div>
+
+<div id="messages">
+  <pre ng-repeat="msg in $ctrl.messages track by $index" class="bg-info">{{ msg }}</pre>
+</div>
+
+<form class="form-group" method="post" ng-if="$ctrl.datacenters.length > 0">
+  <div class="form-group" ng-if="$ctrl.cluster.id">
+    <label for="id">ID</label>
+      <input type="text" ng-model="$ctrl.cluster.id"
+      class="form-control"
+      readonly="true" />
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+      <input type="text" ng-model="$ctrl.cluster.name"
+      class="form-control"
+      pattern="^[a-z0-9\-]*$" ng-pattern-restrict/>
+  </div>
+  <div class="form-group">
+    <label for="name">Type</label>
+    <select class="form-control"
+      ng-options="key as value.description for (key, value) in $ctrl.config.clusterTypes"
+      ng-model="$ctrl.cluster.type">
+      <option value="">Select a Cluster Type</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="datacenter">Datacenter</label>
+      <select class="form-control"
+        ng-options="option.id as option.name for option in $ctrl.datacenters"
+        ng-model="$ctrl.cluster.datacenter">
+        <option value="">Select a Datacenter</option>
+      </select>
+  </div>
+  <div class="form-group" ng-if="$ctrl.cluster.type != undefined" ng-repeat="meta in $ctrl.config.clusterTypes[$ctrl.cluster.type].meta">
+    <label for="{{ meta.key }}">{{ meta.description }}</label>
+      <input type="{{ meta.html }}" ng-model="$ctrl.cluster.meta[meta.key]"
+      class="form-control" />
+  </div>
+
+  <!-- Default Meta -->
+  <div class="form-group" ng-repeat="meta in $ctrl.config.cluster.meta">
+    <label for="{{ meta.key }}">{{ meta.description }}</label>
+      <input type="{{ meta.html }}" ng-model="$ctrl.cluster.meta[meta.key]"
+      class="form-control" placeholder="{{ meta.placeholder }}" />
+  </div>
+
+  <!-- Aditional Meta -->
+  <div class="form-group">
+    <label for="meta">Meta</label>
+    <div ng-repeat="(key, value) in $ctrl.cluster.meta" ng-if="$ctrl.showAsMeta(key)" class="row form-group">
+      <div class="col-md-5">
+        <input readonly type="text"
+          class="form-control"
+          value="{{ key }}" />
+      </div>
+      <div class="col-md-6">
+        <input type="text" ng-model="$ctrl.cluster.meta[key]"
+          class="form-control"/>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-danger btn-block" ng-click="$ctrl.removeMeta(key)">-</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-5">
+        <input type="text"
+          class="form-control"
+          placeholder="New Meta Key"
+          ng-model="metaKey"
+          pattern="^[a-z0-9\-]*$" ng-pattern-restrict/>
+      </div>
+      <div class="col-md-6">
+        <input type="text"
+          class="form-control"
+          ng-model="metaValue"
+          placeholder="New Meta Value"/>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-primary btn-block" ng-click="$ctrl.addMeta(metaKey, metaValue)">+</button>
+      </div>
+    </div>
+  </div>
+  <button ng-if="!$ctrl.cluster.id" type="submit" class="btn btn-primary" ng-click="$ctrl.save()">Save</button>
+  <button ng-if="$ctrl.cluster.id" type="submit" class="btn btn-danger" ng-click="$ctrl.remove()">Remove</button>
+
+</form>
